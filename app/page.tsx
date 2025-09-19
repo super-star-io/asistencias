@@ -16,6 +16,7 @@ import {
 import { Button } from "@heroui/button";
 import { useDisclosure } from "@heroui/use-disclosure";
 import { siteConfig } from "@/config/site";
+import {Spinner} from "@heroui/spinner";
 import { title, subtitle } from "@/components/primitives";
 
 export default function Home() {
@@ -134,7 +135,7 @@ export default function Home() {
                 <p>
                    Estamos enviando tu registro de Asistencia...
                    <div className="flex justify-center">
-                    <div className="w-14 h-14 border-4 border-dashed rounded-full animate-spin border-secondary m-10"></div>
+                    <Spinner color="secondary" label="" labelColor="secondary" className="w-18 h-18" />
                    </div>
                 </p>
               </ModalBody>
@@ -158,7 +159,8 @@ export default function Home() {
             </Select>
           </div>
           <div>&nbsp;</div>
-          <div className="flex gap-3">
+          <div>&nbsp;</div>
+          <div className="flex gap-3 justify-center">
             <Link
               isExternal
               className={buttonStyles({
@@ -168,7 +170,7 @@ export default function Home() {
               })}
               onClick={postAsistencia}
             >
-              Enviar asistencia
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Enviar asistencia&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             </Link>
           </div>
         </div>
@@ -177,6 +179,7 @@ export default function Home() {
       
 
       <div className="mt-8">
+        <br /><br /><br /><br />
         <Snippet hideCopyButton hideSymbol variant="bordered">
           <span>
             Ir a <Code color="secondary">https://www.upmetropolitana.edu.mx/</Code>
