@@ -6,16 +6,34 @@ import { Code } from "@heroui/code";
 import { Image } from "@heroui/image";
 import { button as buttonStyles } from "@heroui/theme";
 import {Select, SelectItem} from "@heroui/select";
-
+import { 
+  Modal,
+  ModalContent, 
+  ModalHeader,
+  ModalBody, 
+  ModalFooter,
+} from "@heroui/modal";
+import { Button } from "@heroui/button";
+import { useDisclosure } from "@heroui/use-disclosure";
 import { siteConfig } from "@/config/site";
 import { title, subtitle } from "@/components/primitives";
 
 export default function Home() {
-
+  const {isOpen, onOpen, onClose} = useDisclosure();
+  const [backdrop, setBackdrop] = useState("opaque");
+  const [loader, setLoader] = useState(false);
   const [selectedMatricula, setSelectedMatricula] = useState("");
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedMatricula(e.target.value);
   };
+
+  const backdrops = ["opaque", "blur", "transparent"];
+
+  const handleOpen = (backdrop) => {
+    setBackdrop(backdrop);
+    onOpen();
+  };
+
   const alumnos = [
   { matricula: "253220041", nombre: "ARELLANO VILLAGOMEZ AMERICA RUBI" },
   { matricula: "253220026", nombre: "AQUINO LOPEZ VICTOR ANGEL" },
@@ -64,7 +82,8 @@ export default function Home() {
 ]
 
   const postAsistencia = () => {
-    
+    handleOpen('blur')
+    setLoader(true);
     const data = selectedMatricula.split('-');
     if (data.length !== 2) {
       alert('Matrícula inválida');
@@ -88,7 +107,8 @@ export default function Home() {
         "Content-Type": "application/json",
       },
     }).then((res) => res.json().then((data) => {
-      console.log(data);
+      setLoader(false);
+      onClose();
       if (data.success) {
         alert('Asistencia registrada');
       } else {
@@ -107,35 +127,57 @@ export default function Home() {
         <br />
       </div>
       
-    
-      <div className="w-full md:w-lg">
-        <Select
-          className="max-w-xl"
-          color="secondary"
-          defaultSelectedKeys={["cat"]}
-          label="Lista de nombres"
-          placeholder="Selecciona tu nombre"
-          onChange={handleChange}
-        >
-          {alumnos.map((alumno) => (
-            <SelectItem key={`${alumno.matricula}-${alumno.nombre}`}>{alumno.nombre}</SelectItem>
-          ))}
-        </Select>
-      </div>
-      <div>&nbsp;</div>
-      <div className="flex gap-3">
-        <Link
-          isExternal
-          className={buttonStyles({
-            color: "secondary",
-            radius: "full",
-            variant: "shadow",
-          })}
-          onClick={postAsistencia}
-        >
-          Enviar asistencia
-        </Link>
-      </div>
+      {
+        loader && <Modal backdrop="blur" isOpen={isOpen} onClose={onClose}>
+        <ModalContent>
+          {(onClose) => (
+            <>
+              <ModalHeader className="flex flex-col gap-1">{selectedMatricula.split('-')[1]}</ModalHeader>
+              <ModalBody>
+                <p>
+                   Estamos enviando tu registro de Asistencia...
+                   <div className="flex justify-center">
+                    <div className="w-14 h-14 border-4 border-dashed rounded-full animate-spin border-secondary m-10"></div>
+                   </div>
+                </p>
+              </ModalBody>
+            </>
+          )}
+        </ModalContent>
+      </Modal> ||
+        <div>
+          <div className="w-full md:w-lg">
+            <Select
+              className="max-w-xl"
+              color="secondary"
+              defaultSelectedKeys={["cat"]}
+              label="Lista de nombres"
+              placeholder="Selecciona tu nombre"
+              onChange={handleChange}
+            >
+              {alumnos.map((alumno) => (
+                <SelectItem key={`${alumno.matricula}-${alumno.nombre}`}>{alumno.nombre}</SelectItem>
+              ))}
+            </Select>
+          </div>
+          <div>&nbsp;</div>
+          <div className="flex gap-3">
+            <Link
+              isExternal
+              className={buttonStyles({
+                color: "secondary",
+                radius: "full",
+                variant: "shadow",
+              })}
+              onClick={postAsistencia}
+            >
+              Enviar asistencia
+            </Link>
+          </div>
+        </div>
+
+      }
+      
 
       <div className="mt-8">
         <Snippet hideCopyButton hideSymbol variant="bordered">
