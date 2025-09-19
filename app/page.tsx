@@ -105,7 +105,7 @@ export default function Home() {
           onChange={handleChange}
         >
           {alumnos.map((alumno) => (
-            <SelectItem key={`${alumno.matricula}-${alumno.nombre}`} name={alumno.nombre}>{alumno.nombre}</SelectItem>
+            <SelectItem key={`${alumno.matricula}-${alumno.nombre}`}>{alumno.nombre}</SelectItem>
           ))}
         </Select>
       </div>
