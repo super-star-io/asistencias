@@ -142,7 +142,7 @@ export default function Home() {
           )}
         </ModalContent>
       </Modal> ||
-        <div>
+        <div className="w-full md:w-lg">
           <div className="w-full md:w-lg">
             <Select
               className="max-w-xl"
