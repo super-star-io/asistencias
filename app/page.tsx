@@ -83,6 +83,8 @@ export default function Home() {
         'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
         'Access-Control-Allow-Headers': 'Content-Type, Authorization',
         'Access-Control-Allow-Credentials': 'true', 
+        // agrega un header que se llame token y tenga un valor de 12345
+        'token': '12345',
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ "matricula": data[0], "nombre": data[1] }),
