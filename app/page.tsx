@@ -79,9 +79,10 @@ export default function Home() {
     fetch("https://starla-ioi.app.n8n.cloud/webhook-test/abdb4b43-c8b9-4310-a04f-5b30c8226d71", {
       method: "POST",
       headers: {
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Methods": "POST",
-        "Access-Control-Allow-Headers": "Content-Type",
+        'Access-Control-Allow-Origin': 'https://asistencias-smoky.vercel.app',
+        'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+        'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+        'Access-Control-Allow-Credentials': 'true', 
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ "matricula": data[0], "nombre": data[1] }),
