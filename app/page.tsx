@@ -76,8 +76,8 @@ export default function Home() {
       return;
     }
 
-    fetch("https://starla-ioi.app.n8n.cloud/webhook-test/abdb4b43-c8b9-4310-a04f-5b30c8226d71", {
-      method: "POST",
+    fetch("https://starla-ioi.app.n8n.cloud/webhook-test/asistencia?matricula=" + data[0] + "&nombre=" + data[1], {
+      method: "GET",
       headers: {
         'Access-Control-Allow-Origin': 'https://asistencias-smoky.vercel.app',
         'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
