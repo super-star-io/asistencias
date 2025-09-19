@@ -93,14 +93,15 @@ export default function Home() {
   return (
     <section className="flex flex-col items-center justify-center gap-4 py-8 md:py-10">
       <div className="inline-block max-w-xl text-center justify-center">
-        <Image src="/upmh.png" alt="UPMH" width={400} height={120} />
+        <Image src="/upmh.png" alt="UPMH" width={400} height={120} className="w-full md:w-sx" />
         <br />
         <span className={title()}>Lista de&nbsp;</span>
         <span className={title({ color: "violet" })}>Asistencia&nbsp;</span>
         <br />
       </div>
-
-      <div className="w-lg">
+      
+    
+      <div className="w-full md:w-lg">
         <Select
           className="max-w-xl"
           color="secondary"
