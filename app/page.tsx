@@ -87,7 +87,14 @@ export default function Home() {
         'token': '12345',
         "Content-Type": "application/json",
       },
-    }).then((res) => res.json());
+    }).then((res) => res.json().then((data) => {
+      console.log(data);
+      if (data.success) {
+        alert('Asistencia registrada');
+      } else {
+        alert('Error al registrar la asistencia');
+      }
+    }));
   }
 
   return (
