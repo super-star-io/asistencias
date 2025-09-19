@@ -29,8 +29,8 @@ export default function Home() {
 
   const backdrops = ["opaque", "blur", "transparent"];
 
-  const handleOpen = (backdrop) => {
-    setBackdrop(backdrop);
+  const handleOpen = () => {
+    setBackdrop('blur');
     onOpen();
   };
 
@@ -82,7 +82,7 @@ export default function Home() {
 ]
 
   const postAsistencia = () => {
-    handleOpen('blur')
+    handleOpen();
     setLoader(true);
     const data = selectedMatricula.split('-');
     if (data.length !== 2) {
