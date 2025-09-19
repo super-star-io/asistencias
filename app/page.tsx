@@ -87,7 +87,6 @@ export default function Home() {
         'token': '12345',
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ "matricula": data[0], "nombre": data[1] }),
     }).then((res) => res.json());
   }
 
