@@ -1,4 +1,5 @@
 'use client'
+import { useState } from "react";
 import { Link } from "@heroui/link";
 import { Snippet } from "@heroui/snippet";
 import { Code } from "@heroui/code";
@@ -11,6 +12,10 @@ import { title, subtitle } from "@/components/primitives";
 
 export default function Home() {
 
+  const [selectedMatricula, setSelectedMatricula] = useState("");
+  const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setSelectedMatricula(e.target.value);
+  };
   const alumnos = [
   { matricula: "253220041", nombre: "ARELLANO VILLAGOMEZ AMERICA RUBI" },
   { matricula: "253220026", nombre: "AQUINO LOPEZ VICTOR ANGEL" },
@@ -58,10 +63,20 @@ export default function Home() {
   { matricula: "253220180", nombre: "PÉREZ PISCENO JORGE ISRAEL" },
 ]
 
-  const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    console.log(e.target.value);
-    const data = e.target.value.split('-');
-    fetch("https://starla-ioi.app.n8n.cloud/webhook/abdb4b43-c8b9-4310-a04f-5b30c8226d71", {
+  const postAsistencia = () => {
+    
+    const data = selectedMatricula.split('-');
+    if (data.length !== 2) {
+      alert('Matrícula inválida');
+      return;
+    }
+    const alumno = alumnos.find((alumno) => alumno.matricula === data[0]);
+    if (!alumno) {
+      alert('Matrícula inválida');
+      return;
+    }
+
+    fetch("https://starla-ioi.app.n8n.cloud/webhook-test/abdb4b43-c8b9-4310-a04f-5b30c8226d71", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -99,11 +114,11 @@ export default function Home() {
         <Link
           isExternal
           className={buttonStyles({
-            color: "primary",
+            color: "secondary",
             radius: "full",
             variant: "shadow",
           })}
-          href={siteConfig.links.docs}
+          onClick={postAsistencia}
         >
           Enviar asistencia
         </Link>
@@ -112,7 +127,7 @@ export default function Home() {
       <div className="mt-8">
         <Snippet hideCopyButton hideSymbol variant="bordered">
           <span>
-            Ir a <Code color="primary">https://www.upmetropolitana.edu.mx/</Code>
+            Ir a <Code color="secondary">https://www.upmetropolitana.edu.mx/</Code>
           </span>
         </Snippet>
       </div>
