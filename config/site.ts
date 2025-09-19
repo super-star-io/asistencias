@@ -2,7 +2,7 @@ export type SiteConfig = typeof siteConfig;
 
 export const siteConfig = {
   name: "Asistencias UPMH",
-  description: "Make beautiful websites regardless of your design experience.",
+  description: "Agente AI para control de asistencias",
   navItems: [
     {
       label: "Home",
