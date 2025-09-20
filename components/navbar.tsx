@@ -7,6 +7,7 @@ import {
   NavbarItem,
   NavbarMenuItem,
 } from "@heroui/navbar";
+import { Tooltip } from "@heroui/tooltip";
 import { Button } from "@heroui/button";
 import { Kbd } from "@heroui/kbd";
 import { Link } from "@heroui/link";
@@ -27,7 +28,21 @@ import {
   Logo,
 } from "@/components/icons";
 
+import {Popover, PopoverTrigger, PopoverContent } from "@heroui/popover";
+
 export const Navbar = () => {
+
+  const content = (
+    <PopoverContent>
+      <div className="px-1 py-2">
+        <div className="text-tiny">Fernando Robles R.</div>
+        <div className="text-tiny">Jessica Melanie Romero L.</div>
+        <div className="text-tiny">Jonathan Villodo S.</div>
+        <div className="text-tiny">Eric Joanathan Rosas G.</div>
+      </div>
+    </PopoverContent>
+  );
+
   const searchInput = (
     <Input
       aria-label="Search"
@@ -87,16 +102,14 @@ export const Navbar = () => {
           <ThemeSwitch />
         </NavbarItem>
         <NavbarItem className="hidden md:flex">
-          <Button
-            isExternal
-            as={Link}
-            className="text-sm font-normal text-default-600 bg-default-100"
-            href={siteConfig.links.sponsor}
-            startContent={<HeartFilledIcon className="text-danger" />}
-            variant="flat"
-          >
-            Integrantes
-          </Button>
+          <Popover color="secondary" placement="top">
+          <PopoverTrigger>
+            <Button className="capitalize" color="secondary">
+              Integrantes
+            </Button>
+          </PopoverTrigger>
+          {content}
+        </Popover>
         </NavbarItem>
       </NavbarContent>
 
